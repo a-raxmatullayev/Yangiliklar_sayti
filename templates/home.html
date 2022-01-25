@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %} Bosh saxifa {% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        {{ user.first_name}} {{user.last_name}} xush kelibsiz!
+        <p><a href="{% url 'logout' %}">Chiqib ketish</a></p>
+    {% else %}
+        <p>Saytga kirmagansiz</p>
+        <p><a href="{% url 'login' %}">Kirish</a></p>
+        <p><a href="{% url 'signup' %}">Ro'yhatdan o'tish</a></p>
+        {% endif %}
+
+    {% for post in object_list %}
+        <ul>
+            <li><h2><a href="{% url 'post_detail' post.pk %}">{{ post.Sarlavha }}</a></h2>
+            <p>{{ post.Matn | slice:":100" }}</p>
+            </li>
+
+        </ul>
+        {% endfor %}
+{% endblock %}
